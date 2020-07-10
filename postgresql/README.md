@@ -1,7 +1,7 @@
 
 # PostgreSQL et PgAdmin
 
-Espace de travail sur Docker.
+Espace de travail sur POSTGRESQL et PGADMIN.
 
 ## Pre-réquis
 
