@@ -1,0 +1,29 @@
+version: '3.4'
+
+volumes:
+  demo1-data:
+    name: demo1-data
+    external: true
+  demo1-pgadmin-data:
+    name: demo1-pgadmin-data
+    external: true
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    volumes:
+      - demo1-pgadmin-data:/var/lib/pgadmin
+    env_file:
+      - .\config\var_db_config.txt
+    ports:
+      - 8088:80
+  postgresql:
+    image: postgres:12.3
+    restart: always
+    volumes:
+      - demo1-data:/var/lib/postgresql/data/
+    env_file:
+      - .\config\var_db_config.txt
+    ports:
+      - 5432:5432
