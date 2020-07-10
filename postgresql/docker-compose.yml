@@ -15,15 +15,19 @@ services:
     volumes:
       - demo1-pgadmin-data:/var/lib/pgadmin
     env_file:
-      - .\config\var_db_config.txt
+      - .\config\var_pgadmin_config.txt
     ports:
       - 8088:80
   postgresql:
-    image: postgres:12.3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: yrosman/postgres12.3-postgis2.5
+    container_name: postgres12-postgis2.5
     restart: always
     volumes:
       - demo1-data:/var/lib/postgresql/data/
     env_file:
-      - .\config\var_db_config.txt
+      - .\config\var_postgres_config.txt
     ports:
       - 5432:5432
