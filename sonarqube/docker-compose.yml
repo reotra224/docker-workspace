@@ -1,0 +1,25 @@
+version: '3.4'
+
+volumes:
+  sonarqube-data:
+    name: sonarqube-data
+    external: true
+  sonarqube-logs:
+    name: sonarqube-logs
+    external: true
+  sonarqube-conf:
+    name: sonarqube-conf
+    external: true
+
+services:
+  sonarqube:
+    image: sonarqube:latest
+    restart: always
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-logs:/opt/sonarqube/logs
+      - sonarqube-conf:/opt/sonarqube/conf
+    env_file:
+      - .\config\sonar_config.txt
+    ports:
+      - 9000:9000
