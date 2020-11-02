@@ -1,0 +1,26 @@
+version: '3.4'
+
+volumes:
+  jenkins-data:
+    name: jenkins-data
+    external: true
+  jenkins-docker-certs:
+    name: jenkins-docker-certs
+    external: true
+
+services:
+  jenkins-modelis:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: yrosman/jenkins-docker:latestjdk11
+    container_name: jenkins-yrosman
+    restart: always
+    privileged: true
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    ports:
+      - 8089:8080
